@@ -1,0 +1,26 @@
+version: '4.1'
+
+compose:
+  files:
+    - docker/docker-compose.yml
+
+interaction:
+  bash:
+    description: Open the Bash shell in app's container
+    service: anaconda
+    command: bash
+    compose:
+      run_options: [no-deps]
+
+  jupyter_install:
+    description: Install Jupyter Notebook
+    service: anaconda
+    command: conda install jupyter -y --quiet
+
+  jupyter:
+    description: Start a Jupyter Notebook server and interact with Anaconda via your browser
+    service: anaconda
+    command: jupyter notebook --notebook-dir=/opt/notebooks --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+
+provision:
+  - dip run -p 8888:8888 jupyter
