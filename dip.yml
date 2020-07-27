@@ -1,9 +1,5 @@
 version: '4.1'
 
-compose:
-  files:
-    - docker/docker-compose.yml
-
 interaction:
   bash:
     description: Open the Bash shell in app's container
